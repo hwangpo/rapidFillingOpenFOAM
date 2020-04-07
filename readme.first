@@ -1,0 +1,55 @@
+
+foamCleanTutorials
+foamCleanPolyMesh
+
+cp -r geometry/ constant/triSurface
+surfaceFeatureExtract
+blockMesh
+snappyHexMesh -overwrite
+
+
+// remeshing
+rm -rf constant/polyMesh
+blockMesh
+snappyHexMesh -overwrite
+
+
+checkMesh -latestTime
+// modify the boundary file in constant/polyMesh/boundary
+
+//--------------------------------------
+check the boundary in polyMesh !!!!
+//--------------------------------------
+
+rm -rf 0
+cp -r 0_org/ 0
+cp 0/alpha.water.orig 0/alpha.water
+
+setFields
+
+compressibleInterFoam > log &
+tail -f log
+
+
+decomposePar
+mpirun -np 8 compressibleInterFoam -parallel > log.parallel &
+tail -f log.parallel
+reconstructPar
+paraFoam
+
+
+
+postProcess -func probesDict
+
+
+
+/* ----------------------------
+   NOTES
+*///---------------------------
+
+In this case, the tank is considered as pressure vessel, 
+and the pressure of air is given as constant, 2e5 Pa.
+
+
+
+

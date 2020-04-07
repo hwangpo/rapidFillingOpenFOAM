@@ -1,0 +1,20 @@
+# Wavefront OBJ file written 2020-03-20T16:00:46
+o tankBottomWall_edgeMesh
+
+# points : 4
+# lines  : 5
+
+# <points count="4">
+v -0.5 -0.25 -0.25
+v 3.0615159e-17 -0.25 -0.25
+v -0.5 -0.25 0.25099999
+v 4.3063155e-17 -0.25 0.25099999
+# </points>
+
+# <edges count="5">
+l 2 3
+l 1 2
+l 3 1
+l 2 4
+l 4 3
+# </edges>
